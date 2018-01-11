@@ -31,13 +31,16 @@ def hotdogPurchase(numHotdogs):
     Goal:
     figure out purchase
 
+    Input:
+    numHotdogs
+
+    Output:
+    number of frank packages, number of bun packages
+
     Method:
     Use modulo to check for remainders. If so, do integer division of numHotdogs
     and increase the package by 1. Division will always produce 1 package less
     since integer division rounds down
-
-    Output:
-    frank_pkg, excess_buns
 
     """
 
@@ -62,6 +65,12 @@ def hotdogExcess(numHotdogs):
     Goal:
     Find excess dogs and buns
 
+    Input:
+    numHotdogs
+
+    Output:
+    excess_franks, excess_buns
+
     Method:
     1. Find out how much packages of each need to be purchased using
         hotdogPurcahse
@@ -69,8 +78,6 @@ def hotdogExcess(numHotdogs):
     3. Subtract how much hotdogs we plan on making
     4. Return the remainder
 
-    Output:
-    excess_franks, excess_buns
     """
 
     franks_pkg, bun_pkg = hotdogPurchase(numHotdogs)
@@ -87,6 +94,12 @@ def isRightTriangle(x1, y1, x2, y2, x3, y3):
     Goal:
     Determine if the triangle is a right triangle (or can have the pythagorean
     theorem applicable)
+
+    Input:
+    Three (x, y) coordinates
+
+    Output:
+    True or False
 
     Method:
     1. Find lengths a,b,c
@@ -156,6 +169,12 @@ def distance(x1, y1, x2, y2):
     Goal:
     Find distance between two points
 
+    Input:
+    Two (x, y) coordinates
+
+    Output:
+    Euclidean distance
+
     Method:
     Distance between two points (x1, y1) and (x2, y2) can be found using the
     pythagorean theorem as follows: dist = ((x2 - x1)**2 + (y2 - y1)**2)**(1/2)
@@ -170,6 +189,12 @@ def lineIntersection(m1, b1, m2, b2):
 
     Goal:
     Find the point at which two lines intersect
+
+    Input:
+    Two slopes, two intercepts
+
+    Output:
+    (x, y) coordinate
 
     Method:
     Use algebra to set two linear equations equal to each other as such -
@@ -209,10 +234,78 @@ def lineIntersection(m1, b1, m2, b2):
     return a, y1
 
 def triangleArea(s1, s2, s3):
-    return 42
+    """
+
+    Goal:
+    Calculate area of triange
+
+    Input:
+    Three lengths for each side of a triangle
+
+    Output:
+    Triangle area
+
+    Method:
+    You can use multiple options here (Pythagorean theorem, Heron's formula,
+    etc.) I'm going to choose the laziest one and use Heron's formula
+
+    1. Calculate distance between three coordinates
+    2. Use Heron's formula A = sqrt(s(s-a)(s-b)(s-c)) where s = (a + b + c)/2
+
+    """
+
+    p = (s1 + s2 + s3)/2
+    Area = (p(p - s1)(p - s2)(p - s3)**(1/2))
+
+    return Area
+
+m1 = 2
+b1 = 1
+m2 = 1
+b2 = 3
+m3 = 0
+b3 = 10
+
+x1, y1 = lineIntersection(m1, b1, m2, b2)
+x2, y2 = lineIntersection(m2, b2, m3, b3)
+x3, y3 = lineIntersection(m1, b1, m3, b3)
+
+side_a = distance(x1, y1, x2, y2)
+side_b = distance(x2, y2, x3, y3)
+side_c = distance(x1, y1, x3, y3)
+
 
 def threeLinesArea(m1, b1, m2, b2, m3, b3):
-    return 42
+    """
+
+    Goal:
+    Calculate area of triange formed by three linear equations
+
+    Input:
+    Three sets of slope and intercepts
+
+    Output:
+    Area
+
+    Method:
+
+    1. Get a set of three coordinates using 'lineIntersection'
+    2. Calculate lengths of all sides of triangle using 'distance'
+    3. Calculate triangle area using 'triangleArea'
+
+    """
+
+    x1, y1 = lineIntersection(m1, b1, m2, b2)
+    x2, y2 = lineIntersection(m2, b2, m3, b3)
+    x3, y3 = lineIntersection(m1, b1, m3, b3)
+
+    side_a = distance(x1, y1, x2, y2)
+    side_b = distance(x2, y2, x3, y3)
+    side_c = distance(x1, y1, x3, y3)
+
+    final_area = triangeArea(side_a, side_b, side_c)
+    print(final_area)
+    return final_area
 
 def bonusFindIntRootsOfCubic(a, b, c, d):
     return 42
